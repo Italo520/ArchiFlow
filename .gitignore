@@ -1,17 +1,36 @@
-# Ignorar ambiente virtual
+# Arquivos de ambiente virtual Python
 .venv/
 venv/
+
+# Arquivos de banco de dados SQLite
+*.sqlite3
+
+# Arquivos temporários do Python
+__pycache__/
 *.pyc
 
-# Ignorar banco de dados SQLite
-db.sqlite3
-
-# Ignorar arquivos do Node
-/auth_frontend/node_modules/
-/auth_frontend/build/
-/auth_frontend/.pnp/
+# Arquivos de dependências e de build do Node.js
+node_modules/
+auth_frontend/build/
+auth_frontend/.pnp/
 .pnp.js
-.env*.local
+
+# Logs do Node.js
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Arquivos de ambiente local
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+
+# macOS-specific files
+.DS_Store
+
+# Arquivos gerados por pacotes específicos
+.cache/
+.coverage
+coverage/
