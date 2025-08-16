@@ -1,0 +1,17 @@
+# Ignorar ambiente virtual
+.venv/
+venv/
+*.pyc
+
+# Ignorar banco de dados SQLite
+db.sqlite3
+
+# Ignorar arquivos do Node
+/auth_frontend/node_modules/
+/auth_frontend/build/
+/auth_frontend/.pnp/
+.pnp.js
+.env*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
