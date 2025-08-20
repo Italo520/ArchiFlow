@@ -34,3 +34,6 @@ yarn-error.log*
 .cache/
 .coverage
 coverage/
+
+# Cache files
+__pycache__/
