@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # Local apps
     'accounts.apps.AccountsConfig',
     'client_service.apps.ClientServiceConfig',
+    'project_service.apps.ProjectServiceConfig',
 ]
 
 MIDDLEWARE = [
