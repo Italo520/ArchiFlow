@@ -1,10 +1,10 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import ClientViewSet
+# client_service/urls.py
 
-router = DefaultRouter()
-router.register(r'clients', ClientViewSet)
+from django.contrib import admin
+from django.urls import path, include
 
 urlpatterns = [
-    path('', include(router.urls)),
+    path('admin/', admin.site.urls),
+    # Inclui as rotas do seu app que agora estão em api_urls.py
+    path('api/clients/', include('client_service.api_urls')),
 ]

@@ -1,0 +1,66 @@
+# docker-compose.yml
+
+services:
+  # NOVO SERVIÇO DE BANCO DE DADOS
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=archiflow_db
+      - POSTGRES_USER=archiflow_user
+      - POSTGRES_PASSWORD=supersecretpassword
+
+  user_service:
+    build: ./user_service
+    volumes:
+      - ./user_service:/app
+    environment:
+      - DJANGO_SETTINGS_MODULE=settings
+      - DB_HOST=db
+      - DB_NAME=archiflow_db
+      - DB_USER=archiflow_user
+      - DB_PASS=supersecretpassword
+    depends_on: # Garante que o DB inicie antes deste serviço
+      - db
+
+  client_service:
+    build: ./client_service
+    volumes:
+      - ./client_service:/app
+    environment:
+      - DJANGO_SETTINGS_MODULE=settings
+      - DB_HOST=db
+      - DB_NAME=archiflow_db
+      - DB_USER=archiflow_user
+      - DB_PASS=supersecretpassword
+    depends_on: # Garante que o DB inicie antes deste serviço
+      - db
+
+  project_service:
+    build: ./project_service
+    volumes:
+      - ./project_service:/app
+    environment:
+      - DJANGO_SETTINGS_MODULE=settings
+      - DB_HOST=db
+      - DB_NAME=archiflow_db
+      - DB_USER=archiflow_user
+      - DB_PASS=supersecretpassword
+    depends_on: # Garante que o DB inicie antes deste serviço
+      - db
+  
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - user_service
+      - client_service
+      - project_service
+
+# ADICIONE ESTE BLOCO NO FINAL para persistir os dados do banco
+volumes:
+  postgres_data:

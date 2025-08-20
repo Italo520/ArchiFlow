@@ -37,13 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # Third-party apps
     'rest_framework',
-    'djangorestframework_simplejwt', # <-- Corrigi um pequeno erro de digitação aqui
-
-    # Local apps (APENAS o que está dentro de user_service/)
-    'accounts.apps.AccountsConfig',
+    'project_service', # <-- O nome do app local
 ]
 
 MIDDLEWARE = [
@@ -56,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'user_service.urls'
+ROOT_URLCONF = 'project_service.urls'
 
 TEMPLATES = [
     {
@@ -73,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'user_service.wsgi.application'
+WSGI_APPLICATION = 'project_service.wsgi.application'
 
 
 # Database
