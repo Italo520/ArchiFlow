@@ -1,7 +1,6 @@
-# docker-compose.yml
+# docker-compose.yml FINAL
 
 services:
-  # NOVO SERVIÇO DE BANCO DE DADOS
   db:
     image: postgres:15
     volumes:
@@ -10,6 +9,11 @@ services:
       - POSTGRES_DB=archiflow_db
       - POSTGRES_USER=archiflow_user
       - POSTGRES_PASSWORD=supersecretpassword
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U archiflow_user -d archiflow_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
   user_service:
     build: ./user_service
@@ -21,8 +25,9 @@ services:
       - DB_NAME=archiflow_db
       - DB_USER=archiflow_user
       - DB_PASS=supersecretpassword
-    depends_on: # Garante que o DB inicie antes deste serviço
-      - db
+    depends_on:
+      db:
+        condition: service_healthy
 
   client_service:
     build: ./client_service
@@ -34,8 +39,9 @@ services:
       - DB_NAME=archiflow_db
       - DB_USER=archiflow_user
       - DB_PASS=supersecretpassword
-    depends_on: # Garante que o DB inicie antes deste serviço
-      - db
+    depends_on:
+      db:
+        condition: service_healthy
 
   project_service:
     build: ./project_service
@@ -47,8 +53,9 @@ services:
       - DB_NAME=archiflow_db
       - DB_USER=archiflow_user
       - DB_PASS=supersecretpassword
-    depends_on: # Garante que o DB inicie antes deste serviço
-      - db
+    depends_on:
+      db:
+        condition: service_healthy
   
   nginx:
     image: nginx:latest
@@ -61,6 +68,5 @@ services:
       - client_service
       - project_service
 
-# ADICIONE ESTE BLOCO NO FINAL para persistir os dados do banco
 volumes:
   postgres_data:

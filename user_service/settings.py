@@ -40,7 +40,7 @@ INSTALLED_APPS = [
 
     # Third-party apps
     'rest_framework',
-    'djangorestframework_simplejwt', # <-- Corrigi um pequeno erro de digitação aqui
+    'rest_framework_simplejwt',
 
     # Local apps (APENAS o que está dentro de user_service/)
     'accounts.apps.AccountsConfig',
@@ -56,7 +56,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'user_service.urls'
+ROOT_URLCONF = 'urls'
 
 TEMPLATES = [
     {
@@ -73,7 +73,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'user_service.wsgi.application'
+WSGI_APPLICATION = 'wsgi.application'
 
 
 # Database
